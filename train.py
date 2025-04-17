@@ -34,7 +34,7 @@ def main():
     # Train the model
     results = model.train(data=args.output_folder+'/data.yaml', epochs=200, imgsz=640, batch=16, device=[0])
 
-    model.export(format=args.model_type)
+    model.export(format=args.export_format)
 
 
 if __name__ == "__main__":
