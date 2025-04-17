@@ -23,14 +23,34 @@ This project automates the process of annotating images and training a YOLO mode
 
 ## Requirements
 
-- Python 3.8 or 3.10 (specifically loaded via modules on your HPC cluster)
-- Dependencies listed in [requirements.txt](d:\Code (new)\school\Capstone\YOLO-auto-train\requirements.txt)
-  - autodistill
-  - autodistill-yolov8
-  - autodistill-grounding-dino
-  - scikit-learn
-  - roboflow
-  - ultralytics
+The project uses two separate Python virtual environments for labeling and training. Below are the requirements for each environment:
+
+#### Labeling Environment
+- Python 3.10
+- `torch`
+- `transformers`
+- `GroundingDINO`
+- `opencv-python`
+- `numpy`
+
+Install dependencies using:
+```
+pip install -r requirements_labeling.txt
+```
+
+#### Training Environment
+- Python 3.8
+- `ultralytics`
+- `torch`
+- `onnx`
+- `numpy`
+
+Install dependencies using:
+```
+pip install -r requirements_training.txt
+```
+
+Ensure that the appropriate Python version is available on your system or HPC cluster for each environment.
 
 ## Project Structure
 
@@ -65,7 +85,7 @@ This project automates the process of annotating images and training a YOLO mode
 ## Notes
 - The script outputs, errors, and logs are recorded in the files specified in `submit.bash` (`yolo_training.out` and `yolo_training.err`).
 - Adjust module versions (e.g., python/3.10 and python/3.8) and file paths as required for your environment.
-- Ensure that your HPC environment has the necessary GPU support and resource allocations.
+- Ensure that your HPC environment has the necessary GPU support and resource allocations. 
 
 
 ## Contact
