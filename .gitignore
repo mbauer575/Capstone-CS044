@@ -1,0 +1,16 @@
+# venv 
+/labelenv
+/trainenv
+
+# any file ending in .err and .out
+*.err
+*.out
+
+# my dataset 
+/toy-car-dataset
+
+# after effects of training
+/runs
+
+# checkpoints
+*.pt

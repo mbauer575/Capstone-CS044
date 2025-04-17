@@ -1,0 +1,6 @@
+autodistill
+autodistill-yolov8
+autodistill-grounding-dino
+scikit-learn
+roboflow
+ultralytics
