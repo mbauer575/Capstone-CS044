@@ -20,6 +20,7 @@ def main():
 
     if blur_kernal%2!=1:
         print("Blur parameter must be an odd integer")
+        return
 
     if not os.path.exists(input_dir):
         print('Input directory not found')
