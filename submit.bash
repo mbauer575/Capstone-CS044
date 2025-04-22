@@ -13,8 +13,9 @@
 INPUT_DIR=./toy-car-dataset       # Input Directory (where raw images are located)
 AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images will be saved)
 # Image augmentation parameters
-BRIGHTNESS=0.2                  # Brightness Augmentation (ex "0.2" or "0.5")
-BLUR=0.2                        # Blur Augmentation (ex "0.2" or "0.5")
+BRIGHTNESS_POSITIVE=0.2           # Brightness Augmentation (ex "0.2" or "0.5")
+BRIGHTNESS_NEGATIVE=0.2          # Brightness Augmentation (ex "0.2" or "0.5")
+BLUR=0.2                          # Blur Augmentation (ex "0.2" or "0.5")
 IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
 
 LABELED_DIR=./labels              # Output Directory (where labels will be saved)
@@ -35,7 +36,7 @@ pip install -r req/augment-requirements.txt
 pip list
 
 # Run augmentation script
-python src/augment.py $INPUT_DIR $AUGMENT_DIR $BRIGHTNESS $BLUR 
+python src/augment.py $INPUT_DIR $AUGMENT_DIR $BRIGHTNESS_POSITIVE $BRIGHTNESS_NEGATIVE $BLUR 
 
 deactivate
 
