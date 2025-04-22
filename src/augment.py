@@ -22,7 +22,7 @@ def main():
         print("Blur parameter must be an odd integer")
         return
 
-    if not os.path.exists(input_dir):
+    if not os.path.exists('../'+input_dir):
         print('Input directory not found')
         return
 
