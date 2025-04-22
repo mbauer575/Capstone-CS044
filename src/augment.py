@@ -24,6 +24,7 @@ def main():
 
     if not os.path.exists('../'+input_dir):
         print('Input directory not found')
+        print('current dir'+os.getcwd())
         return
 
     # create the user-specified output folder
