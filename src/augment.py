@@ -2,7 +2,7 @@ import cv2, numpy as np, os, sys
 
 def getImages(image_list,directory):
     extensions=('.jpg','.jpeg','png')
-    for file in os.listdir(directory):
+    for file in os.listdir('../'+directory):
         if file.lower().endswith(extensions):
             image_list.append(file)
 
@@ -22,7 +22,7 @@ def main():
         print("Blur parameter must be an odd integer")
         return
 
-    if not os.path.exists(input_dir):
+    if not os.path.exists('../'+input_dir):
         print('Input directory not found')
         return
     
@@ -33,11 +33,11 @@ def main():
     getImages(image_list,input_dir)
 
     for image in image_list:
-        img=cv2.imread(input_dir+image,cv2.IMREAD_COLOR)
+        img=cv2.imread('../'+input_dir+image,cv2.IMREAD_COLOR)
 
         #blur=cv2.blur(img,(15,15))
         blur=cv2.GaussianBlur(img,(blur_kernal,blur_kernal),0) #Supposed to better than regular blur?
-        cv2.imwrite(augmented_dir+'/blur_'+image,blur)
+        cv2.imwrite('../'+augmented_dir+'/blur_'+image,blur)
 
         #Create different brithness versions of images
         hsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
@@ -53,11 +53,11 @@ def main():
             final_l=cv2.merge((h_l,s_l,v_l))
             export_l=cv2.cvtColor(final_l,cv2.COLOR_HSV2BGR)
 
-            cv2.imwrite(augmented_dir+'/low_'+image,export_l)
+            cv2.imwrite('../'+augmented_dir+'/low_'+image,export_l)
 
             #Create blurred versions of the brightened/dimmed images
             blur_l=cv2.GaussianBlur(export_l,(blur_kernal,blur_kernal),0)
-            cv2.imwrite(augmented_dir+'/blur_low_'+image,blur_l)
+            cv2.imwrite('../'+augmented_dir+'/blur_low_'+image,blur_l)
 
         if brightness_up!=0:
             h_h,s_h,v_h=cv2.split(hsv)
@@ -70,11 +70,11 @@ def main():
             final_h=cv2.merge((h_h,s_h,v_h))
             export_h=cv2.cvtColor(final_h,cv2.COLOR_HSV2BGR)
 
-            cv2.imwrite(augmented_dir+'/high_'+image,export_h)
+            cv2.imwrite('../'+augmented_dir+'/high_'+image,export_h)
 
             #Create blurred versions of the brightened/dimmed images
             blur_h=cv2.GaussianBlur(export_h,(blur_kernal,blur_kernal),0)
-            cv2.imwrite(augmented_dir+'/blur_high_'+image,blur_h)
+            cv2.imwrite('../'+augmented_dir+'/blur_high_'+image,blur_h)
 
 if __name__ == "__main__":
     main()
