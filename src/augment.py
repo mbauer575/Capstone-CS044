@@ -33,7 +33,7 @@ def main():
     getImages(image_list,input_dir)
 
     for image in image_list:
-        img=cv2.imread('images/'+image,cv2.IMREAD_COLOR)
+        img=cv2.imread(input_dir+image,cv2.IMREAD_COLOR)
 
         #blur=cv2.blur(img,(15,15))
         blur=cv2.GaussianBlur(img,(blur_kernal,blur_kernal),0) #Supposed to better than regular blur?
