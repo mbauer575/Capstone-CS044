@@ -13,6 +13,8 @@
 INPUT_DIR=./toy-car-dataset       # Input Directory (where raw images are located)
 AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images will be saved)
 # ADD AUGMENT PARAMETERS HERE
+
+
 IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
 LABELED_DIR=./labels              # Output Directory (where labels will be saved)
 MODEL_TYPE=yolov8s.pt             # Model Type (ex "yolov8s.pt" or "yolov8n.pt")
