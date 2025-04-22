@@ -2,24 +2,24 @@
 #SBATCH -J YOLOTraining           # Job name
 #SBATCH -p dgxh                   # Partition (queue)
 #SBATCH --gres=gpu:1              # Request 1 GPU
-#SBATCH -o yolo_training.out      # Standard output file
-#SBATCH -e yolo_training.err      # Standard error file
+#SBATCH -o toy-cars-1.out      # Standard output file
+#SBATCH -e toy-cars-1.err      # Standard error file
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=bauermax@oregonstate.edu
 
 # Edit above settings as needed. Currently setup for use on the DGXH cluster at OSU.
 
 # setup environment variables (edit this to your needs)
-INPUT_DIR=./toy-car-dataset       # Input Directory (where raw images are located)
+INPUT_DIR=./raw_img_640           # Input Directory (where raw images are located)
 AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images will be saved)
 # Image augmentation parameters
-BRIGHTNESS_POSITIVE=0.2           # Brightness Augmentation (ex "0.2" or "0.5")
-BRIGHTNESS_NEGATIVE=0.2          # Brightness Augmentation (ex "0.2" or "0.5")
-BLUR=9                           # Blur Augmentation must be odd (ex "9" or "15")
+BRIGHTNESS_POSITIVE=0.1           # Brightness Augmentation (ex "0.2" or "0.5")
+BRIGHTNESS_NEGATIVE=0.1          # Brightness Augmentation (ex "0.2" or "0.5")
+BLUR=9                          # Blur Augmentation (ex "0.2" or "0.5")
 IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
 
 LABELED_DIR=./labels              # Output Directory (where labels will be saved)
-MODEL_TYPE=yolov8s.pt             # Model Type (ex "yolov8s.pt" or "yolov8n.pt")
+MODEL_TYPE=yolov8n.pt             # Model Type (ex "yolov8s.pt" or "yolov8n.pt")
 EXPORT_FORMAT=onnx                # Export Format (ex "onnx" or ".pt")
 
 

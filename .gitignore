@@ -2,6 +2,11 @@
 /augmentenv
 /labelenv
 /trainenv
+/raw_img_640
+/raw_img_1280
+/labels
+/augmented-images
+
 
 # any file ending in .err and .out
 *.err

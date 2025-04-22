@@ -22,8 +22,9 @@ def main():
         print("Blur parameter must be an odd integer")
         return
 
-    if not os.path.exists('../'+input_dir):
+    if not os.path.exists('./'+input_dir):
         print('Input directory not found')
+        print(input_dir)
         print('current dir'+os.getcwd())
         return
 
@@ -40,7 +41,7 @@ def main():
         if img is None:
             print(f"Failed to load {image}")
             continue
-
+        print("processing image"+image)
         # blur
         blur = cv2.GaussianBlur(img, (blur_kernal, blur_kernal), 0)
         cv2.imwrite(os.path.join(augmented_dir, f'blur_{image}'), blur)
