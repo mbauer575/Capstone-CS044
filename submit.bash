@@ -15,7 +15,7 @@ AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images 
 # Image augmentation parameters
 BRIGHTNESS_POSITIVE=0.2           # Brightness Augmentation (ex "0.2" or "0.5")
 BRIGHTNESS_NEGATIVE=0.2          # Brightness Augmentation (ex "0.2" or "0.5")
-BLUR=0.2                          # Blur Augmentation (ex "0.2" or "0.5")
+BLUR=9                           # Blur Augmentation must be odd (ex "9" or "15")
 IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
 
 LABELED_DIR=./labels              # Output Directory (where labels will be saved)
