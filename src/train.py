@@ -24,6 +24,11 @@ def main():
         "export_format",
         help="Export format for model (.pt or onnx)"
     )
+    parser.add_argument(
+        "img_size",
+        help="Image size for training (e.g., 640, 1280)",
+        type=int
+    )
     args = parser.parse_args()
 
     print("Done loading, starting now.")
@@ -32,7 +37,7 @@ def main():
     
     model = YOLO('yolov8n.pt')
     # Train the model
-    results = model.train(data=args.output_folder+'/data.yaml', epochs=200, imgsz=640, batch=16, device=[0])
+    results = model.train(data=args.output_folder+'/data.yaml', epochs=200, imgsz=args.img_size, batch=16, device=[0])
 
     model.export(format=args.export_format)
 

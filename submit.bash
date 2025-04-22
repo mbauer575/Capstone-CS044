@@ -13,8 +13,8 @@
 INPUT_DIR=./toy-car-dataset       # Input Directory (where raw images are located)
 AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images will be saved)
 # ADD AUGMENT PARAMETERS HERE
-
-OUTPUT_DIR=./labels               # Output Directory (where labels will be saved)
+IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
+LABELED_DIR=./labels              # Output Directory (where labels will be saved)
 MODEL_TYPE=yolov8s.pt             # Model Type (ex "yolov8s.pt" or "yolov8n.pt")
 EXPORT_FORMAT=onnx                # Export Format (ex "onnx" or ".pt")
 
@@ -50,7 +50,7 @@ pip install -r req/label-requirements.txt
 pip list
 
 # Run your Python YOLO labeling script
-python src/label.py $INPUT_DIR $OUTPUT_DIR
+python src/label.py $AUGMENT_DIR $LABELED_DIR
 
 deactivate
 
@@ -67,6 +67,6 @@ pip install -r req/train-requirements.txt
 pip list
 
 # Run your Python YOLO training script
-python src/train.py $OUTPUT_DIR $MODEL_TYPE $EXPORT_FORMAT
+python src/train.py $LABELED_DIR $MODEL_TYPE $EXPORT_FORMAT $IMAGE_SIZE
 
 deactivate
