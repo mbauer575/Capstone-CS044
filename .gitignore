@@ -12,6 +12,7 @@
 *.err
 *.out
 
+*.zip
 # my dataset 
 /toy-car-dataset
 
