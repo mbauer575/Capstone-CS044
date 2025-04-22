@@ -12,31 +12,32 @@
 # setup environment variables (edit this to your needs)
 INPUT_DIR=./toy-car-dataset       # Input Directory (where raw images are located)
 AUGMENT_DIR=./augmented-images    # Augmented Directory (where augmented images will be saved)
-# ADD AUGMENT PARAMETERS HERE
-
-
+# Image augmentation parameters
+BRIGHTNESS=0.2                  # Brightness Augmentation (ex "0.2" or "0.5")
+BLUR=0.2                        # Blur Augmentation (ex "0.2" or "0.5")
 IMAGE_SIZE=640                    # Image Size (ex "640" or "1280")
+
 LABELED_DIR=./labels              # Output Directory (where labels will be saved)
 MODEL_TYPE=yolov8s.pt             # Model Type (ex "yolov8s.pt" or "yolov8n.pt")
 EXPORT_FORMAT=onnx                # Export Format (ex "onnx" or ".pt")
 
 
-# # Load environment for image augmentation.
-# module load python/3.10
-#
-# # Create and activate a Python virtual environment (if not already done)
-# python3 -m venv augmentenv
-# source augmentenv/bin/activate
-# 
-# # Install required augmentation Python packages
-# pip install -r req/augment-requirements.txt
-#
-# pip list
-#
-# # Run augmentation script
-# python src/augment.py $INPUT_DIR $AUGMENT_DIR $AUGMENT_PARAMS
-#
-# deactivate
+# Load environment for image augmentation.
+module load python/3.10
+
+# Create and activate a Python virtual environment (if not already done)
+python3 -m venv augmentenv
+source augmentenv/bin/activate
+
+# Install required augmentation Python packages
+pip install -r req/augment-requirements.txt
+
+pip list
+
+# Run augmentation script
+python src/augment.py $INPUT_DIR $AUGMENT_DIR $BRIGHTNESS $BLUR 
+
+deactivate
 
 
 # Loads environment for data labeling.
