@@ -35,7 +35,7 @@ def main():
     print("PyTorch CUDA version:", torch.version.cuda)
     print("Beginning training.")
     
-    model = YOLO('yolov8n.pt')
+    model = YOLO(args.model_type)  # Load a model
     # Train the model
     results = model.train(data=args.output_folder+'/data.yaml', epochs=200, imgsz=args.img_size, batch=16, device=[0])
 
