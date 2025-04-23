@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+
+echo "DEBUG: MODEL_TYPE=$MODEL_TYPE"
+echo "DEBUG: IMAGE_SIZE=$IMAGE_SIZE"
+echo "DEBUG: BRIGHT_POS=$BRIGHT_POS"
+echo "DEBUG: BRIGHT_NEG=$BRIGHT_NEG"
+echo "DEBUG: BLUR=$BLUR"
+
 # read parameters
 MODEL_TYPE=${MODEL_TYPE:?}
 IMAGE_SIZE=${IMAGE_SIZE:?}
