@@ -1,4 +1,5 @@
 import cv2, numpy as np, os, sys
+import shutil
 
 def getImages(image_list, directory):
     extensions = ('.jpg', '.jpeg', '.png')           # add the missing dot
@@ -37,10 +38,15 @@ def main():
 
     for image in image_list:
         # load from the real input_dir
+        img_path = os.path.join(input_dir, image)
         img = cv2.imread(os.path.join(input_dir, image), cv2.IMREAD_COLOR)
         if img is None:
             print(f"Failed to load {image}")
             continue
+
+                # copy the original
+        shutil.copy(img_path, os.path.join(augmented_dir, image))
+
         print("processing image"+image)
         # blur
         blur = cv2.GaussianBlur(img, (blur_kernal, blur_kernal), 0)
