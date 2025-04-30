@@ -37,6 +37,11 @@ This project automates the process of augmenting, annotating, and training a YOL
   - `submit.bash`: Single-job SLURM script for a fixed set of parameters.
   - `submit-multi.bash`: SLURM array script to sweep over parameter combinations in `combos.csv`.
 
+## License
+
+This project is licensed under the GNU General Public License v3.0.  
+See [LICENSE](./LICENSE) for the full terms.
+
 ## Requirements
 
 Three separate Python virtual environments are used:
@@ -125,6 +130,23 @@ Ensure required Python versions and GPU support are available.
 ## Logs
 
 SLURM outputs in `logs/`, named by `%x_%a.out` and `%x_%a.err`.
+
+## Third‑party libraries & licenses
+
+• ultralytics (YOLOv8) — AGPL 3.0  
+  https://github.com/ultralytics/ultralytics/blob/main/LICENSE
+• GroundingDINO — Apache 2.0  
+  https://github.com/IDEA-Research/GroundingDINO  
+• OpenCV — Apache 2.0  
+  https://opencv.org/  
+• PyTorch — BSD‑style  
+  https://pytorch.org/  
+• numpy — BSD  
+  https://numpy.org/  
+• transformers — Apache 2.0  
+  https://github.com/huggingface/transformers  
+• onnx — MIT  
+  https://github.com/onnx/onnx  
 
 ## Contact
 
