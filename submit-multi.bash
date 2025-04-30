@@ -2,10 +2,11 @@
 #SBATCH -J YOLO_sweep
 #SBATCH -p dgxh
 #SBATCH --gres=gpu:1
-#SBATCH --array=1-24
+#SBATCH --array=1-12
+#SBATCH --mem=32G            # request 32 GiB of host RAM
 #SBATCH -o logs/%x_%a.out
 #SBATCH -e logs/%x_%a.err
-#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=bauermax@oregonstate.edu
 
 set -euo pipefail
@@ -43,9 +44,17 @@ if [ ! -d trainenv ]; then
 fi
 
 # 3) pull in our sweep parameters
-LINE=$(sed -n "${SLURM_ARRAY_TASK_ID}q;d" combos.csv)
+LINE=$(awk "NR==${SLURM_ARRAY_TASK_ID}{ print; exit }" combos.csv)
 IFS=',' read -r MODEL_TYPE IMAGE_SIZE BRIGHT_POS BRIGHT_NEG BLUR <<< "$LINE"
 export MODEL_TYPE IMAGE_SIZE BRIGHT_POS BRIGHT_NEG BLUR
+
+echo "DEBUG: MODEL_TYPE=$MODEL_TYPE"
+echo "DEBUG: IMAGE_SIZE=$IMAGE_SIZE"
+echo "DEBUG: BRIGHT_POS=$BRIGHT_POS"
+echo "DEBUG: BRIGHT_NEG=$BRIGHT_NEG"
+echo "DEBUG: BLUR=$BLUR"
+
+echo "[$SLURM_ARRAY_TASK_ID] → MODEL_TYPE=$MODEL_TYPE IMAGE_SIZE=$IMAGE_SIZE"
 
 # 4) kick off the driver
 bash run_pipeline.sh
