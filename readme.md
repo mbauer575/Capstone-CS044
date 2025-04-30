@@ -1,41 +1,66 @@
 # YOLO Auto Train
 
-This project automates the process of annotating images and training a YOLO model using Ultralytics and autodistill. The repository provides scripts for labeling images and training the YOLO model in different Python virtual environments, making it easier to manage dependencies and run on HPC clusters.
+This project automates the process of augmenting, annotating, and training a YOLO model using Ultralytics and autodistill. The repository provides scripts for data augmentation, labeling images with GroundingDINO, training a YOLO model, parameter sweeps, and easy pipeline execution on HPC clusters.
 
 ## Overview
 
-- **Labeling Script (`label.py`)**  
-  Uses GroundingDINO to annotate raw images. The annotations are saved in a user-specified output folder.  
-  *Usage:*  
-  ```
-  python label.py [input_folder] [output_folder]
+- **Augmentation Script (`src/augment.py`)
+  Applies brightness and blur augmentations to raw images.
+  *Usage:*
+  ```powershell
+  python src/augment.py [input_folder] [output_folder] [brightness_up] [brightness_down] [blur_kernel]
   ```
 
-- **Training Script (`train.py`)**  
-  Trains a YOLO model (default: `yolov8n.pt`) on the annotated dataset. The trained model is then exported in the format specified by the user.  
-  *Usage:*  
+- **Labeling Script (`src/label.py`)
+  Uses GroundingDINO to annotate augmented images.
+  *Usage:*
+  ```powershell
+  python src/label.py [input_folder] [output_folder]
   ```
-  python train.py [output_folder] [model_type] [export_format]
+
+- **Training Script (`src/train.py`)**
+  Trains a YOLO model on the labeled dataset and exports the model.
+  *Usage:*
+  ```powershell
+  python src/train.py [labeled_folder] [model_type] [export_format] [image_size]
   ```
-  
-- **Submit Script (`submit.bash`)**  
-  Provides a SLURM-compatible script that sets up two virtual environments (one for labeling and one for training) and runs the above scripts sequentially. Update the script paths, module versions, and environment details as necessary for your HPC setup.
+
+- **Pipeline Driver (`run_pipeline.sh`)]**
+  Chains augmentation, labeling, and training steps in one script. Expects environment variables:
+  `MODEL_TYPE`, `IMAGE_SIZE`, `BRIGHT_POS`, `BRIGHT_NEG`, `BLUR`.
+  *Usage:*
+  ```powershell
+  bash run_pipeline.sh
+  ```
+
+- **SLURM Submit Scripts**
+  - `submit.bash`: Single-job SLURM script for a fixed set of parameters.
+  - `submit-multi.bash`: SLURM array script to sweep over parameter combinations in `combos.csv`.
 
 ## Requirements
 
-The project uses two separate Python virtual environments for labeling and training. Below are the requirements for each environment:
+Three separate Python virtual environments are used:
+
+#### Augmentation Environment
+- Python 3.10
+- `opencv-python`
+- `numpy`
+
+Install:
+```powershell
+pip install -r req/augment-requirements.txt
+```
 
 #### Labeling Environment
 - Python 3.10
 - `torch`
 - `transformers`
 - `GroundingDINO`
-- `opencv-python`
 - `numpy`
 
-Install dependencies using:
-```
-pip install -r requirements_labeling.txt
+Install:
+```powershell
+pip install -r req/label-requirements.txt
 ```
 
 #### Training Environment
@@ -45,49 +70,62 @@ pip install -r requirements_labeling.txt
 - `onnx`
 - `numpy`
 
-Install dependencies using:
-```
-pip install -r requirements_training.txt
+Install:
+```powershell
+pip install -r req/train-requirements.txt
 ```
 
-Ensure that the appropriate Python version is available on your system or HPC cluster for each environment.
+Ensure required Python versions and GPU support are available.
 
 ## Project Structure
 
-- `label.py`: Annotates raw images using GroundingDINO.
-- `train.py`: Trains the YOLO model on the annotated dataset.
-- `submit.bash`: SLURM batch script that orchestrates labeling and training.
-- `requirements.txt`: Lists Python dependencies.
-- `.gitignore`: Ignores virtual environments, dataset folders, training outputs, and checkpoint files.
+```
+.
+├── combos.csv
+├── logs/                      # SLURM job output logs
+├── req/
+│   ├── augment-requirements.txt
+│   ├── label-requirements.txt
+│   └── train-requirements.txt
+├── run_pipeline.sh            # Pipeline driver script
+├── submit.bash                # Single-job SLURM script
+├── submit-multi.bash          # Array-job SLURM sweep script
+└── src/
+    ├── augment.py
+    ├── label.py
+    └── train.py
+```
 
-## Setup and Usage
+## Usage
 
-1. **Clone the repository** to your HPC cluster or local machine.
-
-2. **Prepare your data**: Place your raw images in a folder (e.g., `/path/to/raw/images`).
-
-3. **Setup variabels in submit.bash**: Modify the parameters (such as model type and export format) in `submit.bash`
-    - INPUT_DIR: Input File (e.g., `/path/to/raw/images`)
-    - OUTPUT_DIR: Output File (e.g., `/path/to/annotations`)
-    - MODEL_TYPE: YOLO model type (e.g., `yolov8s.pt` or `yolov8s.yaml`)
-    - EXPORT_FORMAT: Export Format (e.g., `onnx` or `.pt`)
-
-4. **Using the SLURM batch script (`submit.bash`)**:
-   - Submit the job from your terminal:
-     ```
-     module load slurm
-     ```
-     ```
+1. **Clone** the repository.
+2. **Prepare** a folder of raw images.
+3. **Augmented, labeled, and trained** in one shot:
+   ```powershell
+   $env:MODEL_TYPE="yolov8n.pt"
+   $env:IMAGE_SIZE=640
+   $env:BRIGHT_POS=0.2
+   $env:BRIGHT_NEG=0.1
+   $env:BLUR=9
+   bash run_pipeline.sh
+   ```
+4. **SLURM Single Job**:
+   - Edit parameters in `submit.bash` and run:
+     ```powershell
      sbatch submit.bash
      ```
-   - The script creates and activates separate virtual environments, installs dependencies, and runs the labeling and training sequentially.
+5. **SLURM Parameter Sweep**:
+   - Populate `combos.csv` with comma-separated:
+     `model_type,image_size,bright_pos,bright_neg,blur`
+   - Run array:
+     ```powershell
+     sbatch submit-multi.bash
+     ```
 
-## Notes
-- The script outputs, errors, and logs are recorded in the files specified in `submit.bash` (`yolo_training.out` and `yolo_training.err`).
-- Adjust module versions (e.g., python/3.10 and python/3.8) and file paths as required for your environment.
-- Ensure that your HPC environment has the necessary GPU support and resource allocations. 
+## Logs
 
+SLURM outputs in `logs/`, named by `%x_%a.out` and `%x_%a.err`.
 
 ## Contact
 
-For any questions or issues, please contact Maxwell Bauer at bauermax@oregonstate.edu.
+For questions, contact Maxwell Bauer at bauermax@oregonstate.edu.

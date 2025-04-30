@@ -6,6 +6,9 @@
 /raw_img_1280
 /labels
 /augmented-images
+labels_*/
+aug_*/
+
 
 
 # any file ending in .err and .out
