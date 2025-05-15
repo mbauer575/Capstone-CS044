@@ -1,17 +1,18 @@
 # YOLO Auto Train
 
 This project automates the process of augmenting, annotating, and training a YOLO model using Ultralytics and autodistill. The repository provides scripts for data augmentation, labeling images with GroundingDINO, training a YOLO model, parameter sweeps, and easy pipeline execution on HPC clusters.
+![Raw data collection(5)](https://github.com/user-attachments/assets/11aa56f7-20bd-4a45-a206-b6933ed3c609)
 
 ## Overview
 
-- **Augmentation Script (`src/augment.py`)
+- **Augmentation Script (`src/augment.py`)**
   Applies brightness and blur augmentations to raw images.
   *Usage:*
   ```powershell
   python src/augment.py [input_folder] [output_folder] [brightness_up] [brightness_down] [blur_kernel]
   ```
 
-- **Labeling Script (`src/label.py`)
+- **Labeling Script (`src/label.py`)**
   Uses GroundingDINO to annotate augmented images.
   *Usage:*
   ```powershell
@@ -37,10 +38,25 @@ This project automates the process of augmenting, annotating, and training a YOL
   - `submit.bash`: Single-job SLURM script for a fixed set of parameters.
   - `submit-multi.bash`: SLURM array script to sweep over parameter combinations in `combos.csv`.
 
-## License
+## Project Structure
 
-This project is licensed under the GNU General Public License v3.0.  
-See [LICENSE](./LICENSE) for the full terms.
+```
+.
+├── combos.csv
+├── logs/                      # SLURM job output logs
+├── req/
+│   ├── augment-requirements.txt
+│   ├── label-requirements.txt
+│   └── train-requirements.txt
+├── run_pipeline.sh            # Pipeline driver script
+├── submit.bash                # Single-job SLURM script
+├── submit-multi.bash          # Array-job SLURM sweep script
+└── src/
+    ├── augment.py
+    ├── label.py
+    └── train.py
+```
+
 
 ## Requirements
 
@@ -82,25 +98,6 @@ pip install -r req/train-requirements.txt
 
 Ensure required Python versions and GPU support are available.
 
-## Project Structure
-
-```
-.
-├── combos.csv
-├── logs/                      # SLURM job output logs
-├── req/
-│   ├── augment-requirements.txt
-│   ├── label-requirements.txt
-│   └── train-requirements.txt
-├── run_pipeline.sh            # Pipeline driver script
-├── submit.bash                # Single-job SLURM script
-├── submit-multi.bash          # Array-job SLURM sweep script
-└── src/
-    ├── augment.py
-    ├── label.py
-    └── train.py
-```
-
 ## Usage
 
 1. **Clone** the repository.
@@ -131,22 +128,17 @@ Ensure required Python versions and GPU support are available.
 
 SLURM outputs in `logs/`, named by `%x_%a.out` and `%x_%a.err`.
 
+## License
+
+This project is licensed under the GNU General Public License v3.0.  
+See [LICENSE](./LICENSE) for the full terms.
+
 ## Third‑party libraries & licenses
 
 • ultralytics (YOLOv8) — AGPL 3.0  
   https://github.com/ultralytics/ultralytics/blob/main/LICENSE
 • GroundingDINO — Apache 2.0  
-  https://github.com/IDEA-Research/GroundingDINO  
-• OpenCV — Apache 2.0  
-  https://opencv.org/  
-• PyTorch — BSD‑style  
-  https://pytorch.org/  
-• numpy — BSD  
-  https://numpy.org/  
-• transformers — Apache 2.0  
-  https://github.com/huggingface/transformers  
-• onnx — MIT  
-  https://github.com/onnx/onnx  
+  https://github.com/IDEA-Research/GroundingDINO    
 
 ## Contact
 
