@@ -1,7 +1,9 @@
 # Capstone Project CS044: Count How Many Out There
 ## Description
 
-This project is an object detection program that uses a YOLO model to detect parking spaces and cars. The program uses this detection to determine how many parking spots are available and how many are full
+This project is a real-time object detection system that leverages YOLO (You Only Look Once) models to identify cars and parking spaces using a Raspberry Pi 5 equipped with a HAILO AI accelerator. The system analyzes camera input to determine the number of available and occupied parking spots, making it ideal for smart parking applications.
+
+It uses pre-trained YOLO models (no training required), draws visual bounding boxes using OpenCV, and captures live video via the PiCamera module. The HAILO device provides hardware acceleration to ensure efficient inference directly on the edge — no cloud connection needed.
 <img width="1223" alt="cars" src="https://github.com/user-attachments/assets/089c1775-0b50-465d-8b43-73024a087957" />
 
 
@@ -32,6 +34,35 @@ This repository has been split up into two main components: the training scripts
 ```
 
 
+## Hardware Setup
+
+- Raspberry Pi 5
+- HAILO-8 AI Accelerator
+- PiCamera Module
+- MicroSD card (16GB+)
+- Power supply (5V/3A recommended)
+
+
+## Software Requirements
+
+- Python 3.10
+- `opencv-python`
+- `numpy`
+- `ultralytics`
+- `picamera2`
+
+Install the dependencies using:
+
+```bash
+pip install -r req/augment-requirements.txt
+
+
+## Different YOLO Models
+
+If you would like to change what is being detected, you can train a new model using our training program in the 'training' folder and you can add your model to the UI section. Our UI allows you to change models on the fly as well.
+
+
+
 
 ## License
 
@@ -45,6 +76,4 @@ See [LICENSE](./LICENSE) for the full terms.
 • GroundingDINO — Apache 2.0  
   https://github.com/IDEA-Research/GroundingDINO    
 
-## Contact
 
-For questions, contact Maxwell Bauer at bauermax@oregonstate.edu.
