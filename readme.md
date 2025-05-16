@@ -2,6 +2,7 @@
 ## Description
 
 This project is an object detection program that uses a YOLO model to detect parking spaces and cars. The program uses this detection to determine how many parking spots are available and how many are full
+<img width="1223" alt="cars" src="https://github.com/user-attachments/assets/089c1775-0b50-465d-8b43-73024a087957" />
 
 
 ## Overview
