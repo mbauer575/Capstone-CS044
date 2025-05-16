@@ -5,6 +5,10 @@ This project automates the process of augmenting, annotating, and training a YOL
 
 ## Overview
 
+This repository has been split up into two main components: the training scripts and the front-end code. The training scripts are designed to be run on a high-performance computing (HPC) cluster using SLURM, while the front-end code is a python application used for demoing the models generated. It is intended to be ran on a raspberry pi camera with a hailo 8 AI accelerator. 
+
+[Training Documentation](./training/readme.md)
+
 ## Project Structure
 
 ```
