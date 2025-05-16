@@ -1,0 +1,6 @@
+customtkinter
+opencv-python
+Pillow
+ultralytics
+torch
+torchvision
