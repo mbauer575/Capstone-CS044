@@ -1,3 +1,14 @@
+# YOLOv8 Training Pipeline
+
+![Raw data collection(5)](https://github.com/user-attachments/assets/11aa56f7-20bd-4a45-a206-b6933ed3c609)
+
+## Overview
+
+This document provides an overview of the YOLOv8 training pipeline, detailing the requirements and usage instructions for the augmentation, labeling, and training processes.
+
+The pipeline automates the process of augmenting, annotating, and training a YOLO model using Ultralytics and GroundingDINO. It includes scripts for data augmentation, labeling images with GroundingDINO, training a YOLO model, parameter sweeps, and easy pipeline execution on HPC clusters.
+
+
 ## Requirements
 
 Three separate Python virtual environments are used:

@@ -1,7 +1,8 @@
-# YOLO Auto Train
+# Capstone Project CS044: Count How Many Out There
+## Description
 
-This project automates the process of augmenting, annotating, and training a YOLO model using Ultralytics and autodistill. The repository provides scripts for data augmentation, labeling images with GroundingDINO, training a YOLO model, parameter sweeps, and easy pipeline execution on HPC clusters.
-![Raw data collection(5)](https://github.com/user-attachments/assets/11aa56f7-20bd-4a45-a206-b6933ed3c609)
+This project is an object detection program that uses a YOLO model to detect parking spaces and cars. The program uses this detection to determine how many parking spots are available and how many are full
+
 
 ## Overview
 
