@@ -25,9 +25,9 @@ A simple Python GUI application that integrates Ultralytics YOLO object detectio
 
 ## Usage
 `python UI.py`
-- 1. Switch to the Settings tab to select a model from the dropdown.
-- 2. Click Start to begin live detection. The Live View tab displays the camera feed, bounding boxes, object count, and average confidence.
-- 3. Click Stop to end the session and reset the UI.
+1. Switch to the Settings tab to select a model from the dropdown.
+2. Click Start to begin live detection. The Live View tab displays the camera feed, bounding boxes, object count, and average confidence.
+3. Click Stop to end the session and reset the UI.
 
 
 
