@@ -21,60 +21,17 @@ A simple Python GUI application that integrates Ultralytics YOLO object detectio
 
 ## Installation
 
-Clone this repository:
+`pip install -r requirements.txt`
 
-```bash
-git clone https://github.com/yourusername/yolo-detection-ui.git
-cd yolo-detection-ui
-
-##Prerequisites
-- Python 3.8 or higher
-- pip
-Installation
-Clone this repository:
-
-git clone https://github.com/yourusername/yolo-detection-ui.git
-cd yolo-detection-ui
-
-##Create and activate a virtual environment:
-
-python -m venv venv
-source venv/bin/activate    # Linux/macOS
-venv\Scripts\activate.bat  # Windows
-
-##Install dependencies:
-
-pip install -r requirements.txt
-
-Place your YOLO model files (.pt) in the Models/ directory.
+## Usage
+`python UI.py`
+- **Switch to the Settings tab to select a model from the dropdown.
+- **Click Start to begin live detection. The Live View tab displays the camera feed, bounding boxes, object count, and average confidence.
+- **Click Stop to end the session and reset the UI.
 
 
-##Usage
-Run the GUI:
-python UI.py
 
-- Switch to the Settings tab to select a model from the dropdown.
-- Click Start to begin live detection. The Live View tab displays the camera feed, bounding boxes, object count, and average confidence.
-- Click Stop to end the session and reset the UI.
 
-##Code Structure
-- UI.py — Main application script containing the GUI logic and YOLO integration.
-- Models/ — Directory for storing .pt model weight files.
-- images/ — Folder for README screenshots.
-- requirements.txt — List of dependencies.
-Dependencies
-Install the required dependencies via:
 
-customtkinter
-
-opencv-python
-
-Pillow
-
-ultralytics
-
-##Install them via:
-
-pip install customtkinter opencv-python Pillow ultralytics
 
 
