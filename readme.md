@@ -42,21 +42,23 @@ This project automates the process of augmenting, annotating, and training a YOL
 
 ```
 .
-├── combos.csv
-├── logs/                      # SLURM job output logs
-├── req/
-│   ├── augment-requirements.txt
-│   ├── label-requirements.txt
-│   └── train-requirements.txt
-├── run_pipeline.sh            # Pipeline driver script
-├── submit.bash                # Single-job SLURM script
-├── submit-multi.bash          # Array-job SLURM sweep script
-└── src/
-    ├── augment.py
-    ├── label.py
-    └── train.py
+├── training/                  # Contains all training-related scripts, requirements, and settings
+│   ├── combos.csv             # Parameter sweep combinations for SLURM jobs
+│   ├── req/                   # Python requirements for each environment
+│   │   ├── augment-requirements.txt
+│   │   ├── label-requirements.txt
+│   │   └── train-requirements.txt
+│   ├── run_pipeline.sh        # Pipeline driver script
+│   ├── submit.bash            # Single-job SLURM script
+│   ├── submit-multi.bash      # Array-job SLURM sweep script
+│   └── src/
+│       ├── augment.py         # Augmentation script
+│       ├── label.py           # Labeling script
+│       └── train.py           # Training script
+└── frontend/                  # (Upcoming) Front-end code will reside here
 ```
 
+*Note:* The `logs/` folder has been removed from the repo as it is now added to `.gitignore`.
 
 ## Requirements
 
@@ -123,10 +125,6 @@ Ensure required Python versions and GPU support are available.
      ```powershell
      sbatch submit-multi.bash
      ```
-
-## Logs
-
-SLURM outputs in `logs/`, named by `%x_%a.out` and `%x_%a.err`.
 
 ## License
 
