@@ -18,8 +18,6 @@ It uses pre-trained YOLO models (no training required), draws visual bounding bo
 
 This repository has been split up into two main components: the training scripts and the front-end code. The training scripts are designed to be run on a high-performance computing (HPC) cluster using SLURM, while the front-end code is a python application used for demoing the models generated. It is intended to be ran on a raspberry pi camera with a hailo 8 AI accelerator. 
 
-[Training Documentation](./training/README.md)
-
 ## Current Project Status
 - We have gathered and augmented our custom dataset of parking lot scenes with model cars.
 - We have tuned multiple AI models on our custom training data to optimize detection accuracy.
@@ -78,14 +76,8 @@ This project allows for efficient, real-time monitoring of parking space availab
 - `picamera2`
 
 ## Access and Usage
-- Install the software dependencies using the bash command:
-  ```
-  pip install -r req/augment-requirements.txt
-  ```
+- Follow the steps in the training readme: [Training Documentation](./training/README.md)
 - If you would like to change what is being detected, you can train a new model using our training program in the 'training' folder and you can add your model to the UI section. Our UI allows you to change models on the fly as well.
-
-
-
 
 ## License
 
