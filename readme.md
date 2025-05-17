@@ -1,11 +1,11 @@
 # Capstone Project CS044: Count How Many Out There
 ## Team Members and Their Roles
 
-Abdulelah Alanazi - Front-end code, Collecting and Labelling Data,
-Max Bauer - Hardware Setup, Training Scripts, HPC training
-Connor Friedman - YOLO Model setup, Training Scripts, Collecting and Labelling Data
-Andre Stendahl - Training Scripts, Collecting and Labelling Data
-Erik Billquist - Training Scripts, Collecting and Labelling Data, HPC Training
+- Abdulelah Alanazi - Front-end code, Collecting and Labelling Data
+- Max Bauer - Hardware Setup, Training Scripts, HPC training
+- Connor Friedman - YOLO Model setup, Training Scripts, Collecting and Labelling Data
+- Andre Stendahl - Training Scripts, Collecting and Labelling Data
+- Erik Billquist - Training Scripts, Collecting and Labelling Data, HPC Training
 
 ## Description and Problem Statement
 
@@ -19,10 +19,10 @@ It uses pre-trained YOLO models (no training required), draws visual bounding bo
 This repository has been split up into two main components: the training scripts and the front-end code. The training scripts are designed to be run on a high-performance computing (HPC) cluster using SLURM, while the front-end code is a python application used for demoing the models generated. It is intended to be ran on a raspberry pi camera with a hailo 8 AI accelerator. 
 
 ## Current Project Status
-- We have gathered and augmented our custom dataset of parking lot scenes with model cars.
-- We have tuned multiple AI models on our custom training data to optimize detection accuracy.
-- We have created scripts which enable the raspberry pi to utilize these tuned models to detect and count these model cars in real time.
-- We are in the final stages of completing the front-end code to allow for users to select from our various custom-trained AI models for real-time use on the Raspberry Pi.
+- Gathered and augmented our custom dataset of parking lot scenes with model cars.
+- Tuned multiple AI models on our custom training data to optimize detection accuracy.
+- Created scripts which enable the Raspberry Pi to utilize these tuned models to detect and count these model cars in real time.
+- In the final stages of completing the front-end code to allow for users to select from our various custom-trained AI models for real-time use on the Raspberry Pi.
 
 ## Project Structure
 
@@ -91,4 +91,5 @@ See [LICENSE](./LICENSE) for the full terms.
 • GroundingDINO — Apache 2.0  
   https://github.com/IDEA-Research/GroundingDINO    
 
-
+## Contact Us with Questions or Feedback:
+- Andre Stendahl: andrestendahl.01@gmail.com
