@@ -91,5 +91,5 @@ See [LICENSE](./LICENSE) for the full terms.
 • GroundingDINO — Apache 2.0  
   https://github.com/IDEA-Research/GroundingDINO    
 
-## Contact Us with Questions or Feedback:
+## Contact Information for Questions or Feedback:
 - Andre Stendahl: andrestendahl.01@gmail.com
