@@ -1,9 +1,9 @@
 # Capstone Project CS044: Count How Many Out There
 ## Team Members and Their Roles
 
-- Abdulelah Alanazi - Front-end code, Collecting and Labelling Data
+- Abdulelah Alanazi - Front-End Code, Collecting and Labelling Data
 - Max Bauer - Hardware Setup, Training Scripts, HPC training
-- Connor Friedman - YOLO Model setup, Training Scripts, Collecting and Labelling Data
+- Connor Friedman - YOLO Model Setup, Training Scripts, Collecting and Labelling Data
 - Andre Stendahl - Training Scripts, Collecting and Labelling Data
 - Erik Billquist - Training Scripts, Collecting and Labelling Data, HPC Training
 
