@@ -57,27 +57,27 @@ This project allows for efficient, real-time monitoring of parking space availab
 - Initially we wanted to utilize real-world data. We realized that the logistics for accomplishing this would be complicated due to weather and other legal reasons. We instead decided to tune models on data involving model cars and parking lots.
 - Finding a way to position the Pi Camera and Raspberry Pi in order to effectively capture an effective view of our model cars and parking lot was tricky. We ended up 3D-printing a stand to position both the camera and Raspberry Pi above our model parking lot to reliably capture the data we needed. 
 
-## Hardware Setup
-
-- Raspberry Pi 5
-- HAILO-8 AI Accelerator
-- PiCamera Module
-- MicroSD card (16GB+)
-- Power supply (5V/3A recommended)
-- Arduino Uno
-- Arduino LCD display
-
-## Software Requirements
-
-- Python 3.10
-- `opencv-python`
-- `numpy`
-- `ultralytics`
-- `picamera2`
+## Key Technologies Used
+- Hardware:
+  - Raspberry Pi 5
+  - HAILO-8 AI Accelerator
+  - PiCamera Module
+  - MicroSD card (16GB+)
+  - Power supply (5V/3A recommended)
+  - Arduino Uno
+  - Arduino LCD display
+    
+- Software:
+  - `Python 3.10`
+  - `opencv-python`
+  - `numpy`
+  - `ultralytics`
+  - `picamera2`
 
 ## Access and Usage
-- Follow the steps in the training readme: [Training Documentation](./training/README.md)
-- If you would like to change what is being detected, you can train a new model using our training program in the 'training' folder and you can add your model to the UI section. Our UI allows you to change models on the fly as well.
+1. Ensure you have all dependencies from the 'Software Requirements' section installed
+2. Follow the steps in the training readme: [Training Documentation](./training/README.md)
+3. If you would like to change what is being detected, you can train a new model using our training program in the 'training' folder and you can add your model to the UI section. Our UI allows you to change models on the fly as well.
 
 ## License
 
