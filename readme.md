@@ -30,6 +30,10 @@ This repository has been split up into two main components: the training scripts
 │       ├── augment.py         # Augmentation script
 │       ├── label.py           # Labeling script
 │       └── train.py           # Training script
+├── display/
+│   ├── lcd_sketch/
+│   │   ├── lcd_sketch.ino     # Arduino sketch to run LCD
+│   ├── usb.py                 # Python to communicate with aruduino
 └── frontend/                  # (Upcoming) Front-end code will reside here
 ```
 
@@ -41,6 +45,8 @@ This repository has been split up into two main components: the training scripts
 - PiCamera Module
 - MicroSD card (16GB+)
 - Power supply (5V/3A recommended)
+- Arduino Uno
+- Arduino LCD display
 
 
 ## Software Requirements
