@@ -88,8 +88,10 @@ See [LICENSE](./LICENSE) for the full terms.
 
 • ultralytics (YOLOv8) — AGPL 3.0  
   https://github.com/ultralytics/ultralytics/blob/main/LICENSE
+  
 • GroundingDINO — Apache 2.0  
   https://github.com/IDEA-Research/GroundingDINO    
 
 ## Contact Information for Questions or Feedback:
+- Maxwell Bauer: bauermax@oregonstate.edu
 - Andre Stendahl: andrestendahl.01@gmail.com
