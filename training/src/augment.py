@@ -23,14 +23,16 @@ def main():
         print("Blur parameter must be an odd integer")
         return
 
-    if not os.path.exists('./'+input_dir):
+    if not os.path.exists('../../'+input_dir):
         print('Input directory not found')
         print(input_dir)
         print('current dir'+os.getcwd())
         return
+    input_dir='../../'+input_dir
 
     # create the user-specified output folder
-    if not os.path.exists(augmented_dir):
+    if not os.path.exists('../../'+augmented_dir):
+        augmented_dir='../../'+augmented_dir
         os.makedirs(augmented_dir)
 
     image_list = []
@@ -49,8 +51,9 @@ def main():
 
         print("processing image"+image)
         # blur
-        blur = cv2.GaussianBlur(img, (blur_kernal, blur_kernal), 0)
-        cv2.imwrite(os.path.join(augmented_dir, f'blur_{image}'), blur)
+        if blur_kernal!=0:
+            blur = cv2.GaussianBlur(img, (blur_kernal, blur_kernal), 0)
+            cv2.imwrite(os.path.join(augmented_dir, f'blur_{image}'), blur)
 
         #Create different brithness versions of images
         hsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
