@@ -6,6 +6,7 @@ import cv2
 from PIL import Image, ImageTk
 from ultralytics import YOLO
 import serial.tools.list_ports
+from picamera2.devices import Hailo
 
 # ---------------- Setup Arduino ------------ #
 ports = serial.tools.list_ports.comports()
@@ -35,9 +36,15 @@ model_paths = [
 model_names = [os.path.basename(p) for p in model_paths]
 model_map   = dict(zip(model_names, model_paths))
 # ---------------- Globals ---------------- #
+model_h, model_w, _ = hailo.get_input_shape()
+video_w, video_h = 1280, 960
+
+with open('cars.idunno', 'r', encoding="utf-8") as f:
+    class_names = f.read().splitlines()
 cap = None
 model = None
 running = False
+lores = {'size': (model_w, model_h), 'format': 'RGB888'}
 
 # ---------------- Main Window ---------------- #
 window = ctk.CTk()
@@ -140,6 +147,18 @@ ctk.CTkButton(
     font=("Helvetica", 13)
 ).pack(side=tk.LEFT, padx=20)
 
+def extract_detections(hailo_output, w, h, class_names, threshold=0.5):
+    """Extract detections from the HailoRT-postprocess output."""
+    results = []
+    for class_id, detections in enumerate(hailo_output):
+        for detection in detections:
+            score = detection[4]
+            if score >= threshold:
+                y0, x0, y1, x1 = detection[:4]
+                bbox = (int(x0 * w), int(y0 * h), int(x1 * w), int(y1 * h))
+                results.append([class_names[class_id], bbox, score])
+    return results
+
 # ---------------- Detection Logic ---------------- #
 def update_frame():
     global cap, model, running
@@ -150,8 +169,12 @@ def update_frame():
             return
 
         # Run YOLO inference
-        results = model(frame)[0]
-        detections = results.boxes
+        # results = model(frame)[0]
+        # detections = results.boxes
+
+        # Run YOLO model with Hailo
+        results = model.run(frame)
+        detections = extract_detections(results, video_w, video_h, class_names, 0.7)
 
         # If the amount of detections has changed we need to update the arduino
         count = len(detections)
@@ -194,7 +217,7 @@ def start_detection():
     global cap, model, running
     selected_name = model_var.get()       
     model_path    = model_map[selected_name]
-    model         = YOLO(model_path)
+    model         = Hailo(model_path)
     cap           = cv2.VideoCapture(0)
     running       = True
     update_frame()
