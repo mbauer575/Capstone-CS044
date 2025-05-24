@@ -1,0 +1,9 @@
+#git ignore file for the Frontend project
+# venv
+.venv
+venv
+
+
+# * ending in .log
+
+*.log
