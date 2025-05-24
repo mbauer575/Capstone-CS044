@@ -5,6 +5,19 @@ import tkinter as tk
 import cv2
 from PIL import Image, ImageTk
 from ultralytics import YOLO
+import serial.tools.list_ports
+
+# ---------------- Setup Arduino ------------ #
+ports = serial.tools.list_ports.comports()
+serialInst = serial.Serial()
+
+for port in ports:
+    if "Arduino" in str(port):
+        serialInst.port = str(port)[:4]
+
+serialInst.baudrate = 9600
+if serialInst.port != None:
+    serialInst.open()
 
 # ---------------- Appearance ---------------- #
 ctk.set_appearance_mode("light")
@@ -139,7 +152,12 @@ def update_frame():
         # Run YOLO inference
         results = model(frame)[0]
         detections = results.boxes
+
+        # If the amount of detections has changed we need to update the arduino
         count = len(detections)
+        if serialInst.isOpen() and count != object_count_var:
+            command=str(count)+"\n"
+            serialInst.write(command.encode('utf-8'))
         object_count_var.set(count)
 
         # Compute average confidence
@@ -195,3 +213,6 @@ def stop_detection():
 
 # ---------------- Run ---------------- #
 window.mainloop()
+
+# ---------- Arduino Cleanup -----------#
+serialInst.close()
