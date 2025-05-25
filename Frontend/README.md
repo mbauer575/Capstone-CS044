@@ -11,9 +11,10 @@ A simple Python GUI application that integrates Ultralytics YOLO object detectio
 - **Statistics Panel**: Displays total objects detected and average confidence score.
 - **Start/Stop Controls**: Seamlessly start and stop the camera feed and model inference.
 
-<img width="746" alt="UI image" src="https://github.com/user-attachments/assets/6da508a2-c181-4d35-8a96-8459b770c2fe" />
+![image](https://github.com/user-attachments/assets/9365e2d3-8b7d-489f-8bb3-d0678eeb5400)
 
-<img width="944" alt="image" src="https://github.com/user-attachments/assets/492b9991-07bf-4e27-ab0f-95734e93094c" />
+![image](https://github.com/user-attachments/assets/b59efd2b-c3d3-473c-83e9-18419d65e9ae)
+
 
 ## Prerequisites
 
