@@ -292,6 +292,10 @@ def set_markers():
     # Update global polygons after editing
     polygons = local_polygons.copy()
 
+    #Send to Arduino
+    command = str(polygons) + "@"
+    serialInst.write(command.encode('utf-8'))
+
 # ---------------- Run ---------------- #
 window.mainloop()
 serialInst.close()
