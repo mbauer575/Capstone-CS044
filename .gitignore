@@ -16,7 +16,7 @@ aug_*/
 *.out
 
 *.zip
-# my dataset 
+# my dataset
 /toy-car-dataset
 
 # after effects of training
@@ -24,3 +24,9 @@ aug_*/
 
 # checkpoints
 *.pt
+
+/Frontend/venv
+/Frontend/venv2
+/Frontend/venv3
+
+/Frontend/polygons.json

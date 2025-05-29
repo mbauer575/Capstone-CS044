@@ -1,22 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Exit on error
-set -e
+VENV_DIR="venv2"
 
-# Set venv directory
-VENV_DIR="venv"
-
-# Create virtual environment if it doesn't exist
+# 1) Create & bootstrap venv only once
 if [ ! -d "$VENV_DIR" ]; then
-    python3 -m venv "$VENV_DIR"
+  echo "Creating virtualenv in $VENV_DIR?"
+  python3 -m venv "$VENV_DIR" --system-site-packages
+
+  echo "Activating venv and installing requirements?"
+  # shellcheck disable=SC1091
+  source "$VENV_DIR/bin/activate"
+
+  pip install --upgrade pip
+  pip install -r requirements.txt
+else
+  # Just activate on subsequent runs
+  # shellcheck disable=SC1091
+  source "$VENV_DIR/bin/activate"
 fi
 
-# Activate virtual environment
-# shellcheck disable=SC1091
-source "$VENV_DIR/bin/activate"
+# 2) If PIL.ImageTk still won?t import, force-reinstall Pillow inside the venv
+if ! python -c "from PIL import ImageTk" &>/dev/null; then
+  echo "ImageTk missing?rebuilding Pillow in venv?"
+  pip install --upgrade \
+    --force-reinstall \
+    --ignore-installed \
+    --no-binary :all: \
+    Pillow
+fi
 
-# Install requirements
-pip install -r requirements.txt
-
-# Run the UI
+echo "Launching UI?"
 python UI.py
+
+# optional ?press any key to exit?
+read -n1 -r -p "Press any key to exit?" key
+
+pause

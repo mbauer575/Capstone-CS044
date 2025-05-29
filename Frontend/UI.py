@@ -1,4 +1,5 @@
 import os
+import sys
 import customtkinter as ctk
 import tkinter as tk
 import cv2
@@ -21,7 +22,7 @@ ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
 
 # ---------------- Model List ---------------- #
-model_paths = ["Models/cars.hef"]
+model_paths = ["Models/cars.hef", "Models/yolov8s.hef"]
 model_names = [os.path.basename(p) for p in model_paths]
 model_map = dict(zip(model_names, model_paths))
 
@@ -77,7 +78,7 @@ model_var = tk.StringVar(value=model_names[0])
 ctk.CTkOptionMenu(control_panel, variable=model_var, values=model_names, width=200).pack()
 
 ctk.CTkButton(control_panel, text="Start", command=lambda: start_detection()).pack(pady=(10,5))
-ctk.CTkButton(control_panel, text="Stop", command=lambda: stop_detection()).pack(pady=5)
+ctk.CTkButton(control_panel, text="Restart", command=lambda: restart_app()).pack(pady=5)
 ctk.CTkButton(control_panel, text="Set Up", command=lambda: set_markers()).pack(pady=5)
 
 ctk.CTkLabel(control_panel, text="Cars:", font=("Helvetica", 14)).pack(pady=(20,0))
@@ -165,6 +166,10 @@ def load_polygons():
 
 def start_detection():
     global picam2, hailo, class_names, model_w, model_h, video_w, video_h, running
+
+    if running:
+        stop_detection()
+
     model_file = model_map[model_var.get()]
     hailo = Hailo(model_file)
     model_h, model_w, _ = hailo.get_input_shape()
@@ -200,7 +205,18 @@ def stop_detection():
         hailo = None
     camera_label.configure(image=None)
 
+
+def restart_app():
+    """
+    Fully terminate the current process and re-launch the same script.
+    """
+    # clean up any running camera + hailo
+    stop_detection()
+
+    # re-exec this Python interpreter with the same arguments
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 def set_markers():
+    global picam2, polygons
     if not picam2:
         print("Camera not started.")
         return

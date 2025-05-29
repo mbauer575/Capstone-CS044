@@ -1,5 +1,4 @@
 customtkinter
 opencv-python
-Pillow
 picamera2
 pyserial
