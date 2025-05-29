@@ -44,9 +44,10 @@ This repository has been split up into two main components: the training scripts
 ├── display/
 │   ├── lcd_sketch/
 │   │   ├── lcd_sketch.ino     # Arduino sketch to run LCD
-│   ├── usb.py                 # Python to communicate with aruduino
+│   └── usb.py                 # Python to communicate with aruduino
 └── frontend/                  
-    └── UI.py                  # Front end UI for running infrance on parking lot model
+    ├── UI.py                  # Front end UI for running infrance on parking lot model
+    └── start.sh               # Easy startup script for the frontend
 ```
 
 ## Core benefits and Target Audience
