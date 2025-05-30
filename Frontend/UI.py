@@ -104,15 +104,19 @@ def update_frame():
         detections = extract_detections(hailo_out, video_w, video_h, class_names, score_thresh)
 
         count = len(detections)
-        if count != object_count_var.get():
-            command = str(count) + "\n"
-            serialInst.write(command.encode('utf-8'))
+        # if count != object_count_var.get():
+        #     command = str(count) + "\n"
+        #     serialInst.write(command.encode('utf-8'))
         object_count_var.set(count)
         avg_conf = sum([s for (_,_,s) in detections]) / count if count else 0.0
         conf_var.set(round(avg_conf, 2))
 
 
         # Count parking spaces
+        temp = num_parking_spaces.get()
+        if temp != len(polygons):
+            command = str(len(polygons)) + "@\n"
+            serialInst.write(command.encode('utf-8'))
         num_parking_spaces.set(len(polygons))
 
         # Reset the occupied spaces counter at the start of each frame
@@ -138,6 +142,10 @@ def update_frame():
             cv2.polylines(main, [pts], isClosed=True, color=color, thickness=2)
 
         # Update the UI with the correct occupied count
+        temp=num_occupied_spaces.get()
+        if temp != occupied_count:
+            command = str(occupied_count) + "\n"
+            serialInst.write(command.encode('utf-8'))
         num_occupied_spaces.set(occupied_count)
 
         # Draw detections
@@ -307,10 +315,6 @@ def set_markers():
 
     # Update global polygons after editing
     polygons = local_polygons.copy()
-
-    #Send to Arduino
-    command = str(polygons) + "@"
-    serialInst.write(command.encode('utf-8'))
 
 # ---------------- Run ---------------- #
 window.mainloop()
