@@ -114,7 +114,7 @@ def update_frame():
 
         # Count parking spaces
         temp = num_parking_spaces.get()
-        if temp != len(polygons):
+        if temp != len(polygons) and serialInst.isOpen():
             command = str(len(polygons)) + "@\n"
             serialInst.write(command.encode('utf-8'))
         num_parking_spaces.set(len(polygons))
@@ -143,7 +143,7 @@ def update_frame():
 
         # Update the UI with the correct occupied count
         temp=num_occupied_spaces.get()
-        if temp != occupied_count:
+        if temp != occupied_count and serialInst.isOpen():
             command = str(occupied_count) + "\n"
             serialInst.write(command.encode('utf-8'))
         num_occupied_spaces.set(occupied_count)
